@@ -5,7 +5,6 @@ from allure_commons.types import AttachmentType
 import requests
 
 URL = 'https://demowebshop.tricentis.com/addproducttocart/'
-CART_URL = 'https://demowebshop.tricentis.com/cart'
 
 
 def test_add_notebook_to_cart(open_browser):
@@ -18,9 +17,9 @@ def test_add_notebook_to_cart(open_browser):
         cookie = response.cookies.get('Nop.customer')
 
     with step("Set cookie from API"):
-        browser.open(CART_URL)
+        browser.open('/cart')
         browser.driver.add_cookie({"name": "Nop.customer", "value": cookie})
-        browser.open(CART_URL)
+        browser.open('/cart')
 
     with step("Verify notebook in shopping cart"):
         browser.element('.product-name').should(have.text('14.1-inch Laptop'))
@@ -54,9 +53,9 @@ def test_add_book_to_cart(open_browser):
         cookie = response.cookies.get('Nop.customer')
 
     with step("Set cookie from API"):
-        browser.open(CART_URL)
+        browser.open('/cart')
         browser.driver.add_cookie({"name": "Nop.customer", "value": cookie})
-        browser.open(CART_URL)
+        browser.open('/cart')
 
     with step("Verify book in shopping cart"):
         browser.element('.product-name').should(have.text('Fiction'))
